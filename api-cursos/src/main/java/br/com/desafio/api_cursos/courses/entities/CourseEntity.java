@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -17,6 +18,7 @@ import java.util.UUID;
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CourseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -29,7 +31,7 @@ public class CourseEntity {
     private CourseCategory category;
 
     @NotBlank(message = "Campo obrigatório")
-    private final boolean active = true;
+    private boolean active;
 
     @CreationTimestamp
     private LocalDateTime created_at;
