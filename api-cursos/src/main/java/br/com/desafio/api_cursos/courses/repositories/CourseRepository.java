@@ -12,6 +12,7 @@ import java.util.UUID;
 @Repository
 public interface CourseRepository extends JpaRepository<CourseEntity, UUID> {
 
-    @Query("")
+    @Query("SELECT course FROM CourseEntity course " +
+            "WHERE UPPER(course.name) LIKE UPPER(CONCAT('%', :name, '%'))")
     Page<CourseEntity> searchByName(String name, Pageable pageable);
 }

@@ -1,11 +1,9 @@
 package br.com.desafio.api_cursos.courses.entities;
 
 import br.com.desafio.api_cursos.courses.entities.enums.CourseCategory;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,6 +17,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "courses")
 public class CourseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -27,10 +26,11 @@ public class CourseEntity {
     @NotBlank(message = "O nome é obrigatório")
     private String name;
 
-    @NotBlank(message = "A categoria é obrigatória")
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "A categoria é obrigatória")
     private CourseCategory category;
 
-    @NotBlank(message = "Campo obrigatório")
+    @NotNull(message = "O campo é obrigatório")
     private boolean active;
 
     @CreationTimestamp
