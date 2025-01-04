@@ -2,6 +2,7 @@ package br.com.spolador.gestao_vagas.modules.candidate.useCases;
 
 import br.com.spolador.gestao_vagas.exceptions.JobNotFoundException;
 import br.com.spolador.gestao_vagas.exceptions.UserNotFoundException;
+import br.com.spolador.gestao_vagas.modules.candidate.repositories.ApplyJobRepository;
 import br.com.spolador.gestao_vagas.modules.candidate.repositories.CandidateRepository;
 import br.com.spolador.gestao_vagas.modules.company.repositories.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ public class ApplyJobCandidateUseCase {
     @Autowired
     private JobRepository jobRepository;
 
+    @Autowired
+    private ApplyJobRepository applyJobRepository;
+
     public void execute(UUID idCandidate, UUID idJob){
         this.candidateRepository.findById(idCandidate)
                 .orElseThrow(() -> {
@@ -28,5 +32,7 @@ public class ApplyJobCandidateUseCase {
                 .orElseThrow(() -> {
                     throw new JobNotFoundException();
                 });
+
+
     }
 }
