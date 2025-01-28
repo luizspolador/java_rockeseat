@@ -20,9 +20,11 @@ public class CandidateService {
         Map<String, String> data = new HashMap<>();
         data.put("username", username);
         data.put("password", password);
-        HttpEntity<Map<String,String>> request = new HttpEntity<>(data, headers);
+        HttpEntity<Map<String, String>> request = new HttpEntity<>(data, headers);
         var result = rt.postForObject("http://localhost:8080/candidate/auth", request, Token.class);
 
         return result;
     }
+
+
 }
