@@ -1,6 +1,7 @@
 package br.com.spolador.front_gestao_vagas.modules.candidate.service;
 
 import br.com.spolador.front_gestao_vagas.modules.candidate.dto.Token;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -13,6 +14,9 @@ import java.util.Map;
 @Service
 public class CandidateService {
 
+    @Value("${host.api.gestao.vagas}")
+    private String hostAPIGestaoVagas;
+
     public Token login(String username, String password){
         RestTemplate rt = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
@@ -21,7 +25,8 @@ public class CandidateService {
         data.put("username", username);
         data.put("password", password);
         HttpEntity<Map<String, String>> request = new HttpEntity<>(data, headers);
-        var result = rt.postForObject("http://localhost:8080/candidate/auth", request, Token.class);
+        var url = hostAPIGestaoVagas.concat("/candidate/auth");
+        var result = rt.postForObject(url, request, Token.class);
 
         return result;
     }
